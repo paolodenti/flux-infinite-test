@@ -1,5 +1,6 @@
 package com.github.paolodenti.fluxtest.web;
 
+import com.github.paolodenti.fluxtest.dto.SomeDto;
 import java.util.Random;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -21,14 +22,14 @@ public class SseController {
      * @return an SSE stream
      */
     @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<Integer> streamTest() {
+    public Flux<SomeDto> streamTest() {
         return Flux.generate(sink -> {
             int sleep = sleepSome(3000);
             if (sleep > 2700) {
                 log.info("Got {}, exiting", sleep);
                 sink.complete();
             } else {
-                sink.next(sleep);
+                sink.next(new SomeDto(sleep));
             }
         });
     }

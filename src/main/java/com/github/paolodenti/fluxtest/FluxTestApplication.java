@@ -1,5 +1,6 @@
 package com.github.paolodenti.fluxtest;
 
+import com.github.paolodenti.fluxtest.dto.SomeDto;
 import java.time.LocalTime;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,17 +35,17 @@ public class FluxTestApplication implements CommandLineRunner {
 
         WebClient client = WebClient.create("http://localhost:" + environment.getProperty("server.port"));
 
-        ParameterizedTypeReference<ServerSentEvent<Integer>> type
+        ParameterizedTypeReference<ServerSentEvent<SomeDto>> type
                 = new ParameterizedTypeReference<>() {
         };
 
-        Flux<ServerSentEvent<Integer>> eventStream = client.get()
+        Flux<ServerSentEvent<SomeDto>> eventStream = client.get()
                 .uri("/sse-stream")
                 .retrieve()
                 .bodyToFlux(type);
 
         eventStream.subscribe(
-                content -> log.info("Time: {} - event: {}", LocalTime.now(), content.data()),
+                content -> log.info("Time: {}: {}", LocalTime.now(), content.data()),
                 error -> log.error("Error receiving SSE", error),
                 () -> log.info("Stream Completed."));
     }
