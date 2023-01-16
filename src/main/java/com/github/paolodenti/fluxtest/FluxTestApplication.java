@@ -32,8 +32,7 @@ public class FluxTestApplication implements CommandLineRunner {
     public void run(String... args) {
         log.info("Consumer test");
 
-        String url = "http://localhost:" + environment.getProperty("server.port");
-        WebClient client = WebClient.create(url);
+        WebClient client = WebClient.create("http://localhost:" + environment.getProperty("server.port"));
 
         ParameterizedTypeReference<ServerSentEvent<Integer>> type
                 = new ParameterizedTypeReference<>() {
