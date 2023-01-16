@@ -23,6 +23,11 @@ public class FluxTestApplication implements CommandLineRunner {
         SpringApplication.run(FluxTestApplication.class, args);
     }
 
+    /**
+     * Simulate a real consumer using a reactive SSE client.
+     *
+     * @param args args
+     */
     @Override
     public void run(String... args) {
         log.info("Consumer test");
