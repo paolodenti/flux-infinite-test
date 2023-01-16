@@ -47,6 +47,6 @@ public class FluxTestApplication implements CommandLineRunner {
         eventStream.subscribe(
                 content -> log.info("Time: {}: {}", LocalTime.now(), content.data()),
                 error -> log.error("Error receiving SSE", error),
-                () -> log.info("Stream Completed."));
+                () -> log.info("Stopping stream subscribe."));
     }
 }
