@@ -24,6 +24,7 @@ public class SseController {
     @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<SomeDto> streamTest() {
         return Flux.generate(sink -> {
+            // sleep to simulate an async event
             int sleep = sleepSome(3000);
             if (sleep > 2700) { // simulate an <end of stream> condition
                 log.info("Got {}, exiting", sleep);
