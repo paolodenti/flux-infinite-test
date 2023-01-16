@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.github.paolodenti.fluxtest;
 
 import java.time.LocalTime;
 import lombok.RequiredArgsConstructor;

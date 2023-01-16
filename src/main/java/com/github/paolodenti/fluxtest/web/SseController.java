@@ -1,4 +1,4 @@
-package com.example.demo.web;
+package com.github.paolodenti.fluxtest.web;
 
 import java.util.Random;
 import lombok.extern.slf4j.Slf4j;
