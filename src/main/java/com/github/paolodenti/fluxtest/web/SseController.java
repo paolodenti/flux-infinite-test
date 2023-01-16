@@ -27,7 +27,7 @@ public class SseController {
             // sleep to simulate an async event
             int sleep = sleepSome(3000);
             if (sleep > 2700) { // simulate an <end of stream> condition
-                log.info("Got {}, exiting", sleep);
+                log.info("Stream ended, exiting");
                 sink.complete();
             } else {
                 sink.next(new SomeDto(sleep));
