@@ -5,6 +5,7 @@ import com.github.paolodenti.fluxtest.service.EventService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
+import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +25,8 @@ public class SseController {
      * @return an SSE stream
      */
     @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<SomeDto> streamTest() {
-        return Flux.generate(eventService::registerSubscriber);
+    public Flux<ServerSentEvent<SomeDto>> streamTest() {
+        return Flux.generate(eventService::registerSubscriber)
+                .map(e -> ServerSentEvent.<SomeDto>builder().data(e).build());
     }
 }
