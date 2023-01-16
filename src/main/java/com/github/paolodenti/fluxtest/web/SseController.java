@@ -25,7 +25,7 @@ public class SseController {
     public Flux<SomeDto> streamTest() {
         return Flux.generate(sink -> {
             int sleep = sleepSome(3000);
-            if (sleep > 2700) {
+            if (sleep > 2700) { // simulate an <end of stream> condition
                 log.info("Got {}, exiting", sleep);
                 sink.complete();
             } else {
