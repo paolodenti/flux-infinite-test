@@ -15,12 +15,12 @@ import reactor.core.publisher.Flux;
 @Slf4j
 @SpringBootApplication
 @RequiredArgsConstructor
-public class DemoApplication implements CommandLineRunner {
+public class FluxTestApplication implements CommandLineRunner {
 
     private final Environment environment;
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(FluxTestApplication.class, args);
     }
 
     @Override
